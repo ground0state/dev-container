@@ -1,0 +1,17 @@
+version: '2.3'
+services:
+  worker:
+    build:
+      context: ./
+      args:
+      - PROXY_URL=$PROXY_URL
+    environment:
+    - NVIDIA_VISIBLE_DEVICES=all
+    - NVIDIA_DRIVER_CAPABILITIES=all
+    container_name: dev
+    ports:
+    - "48881:22"
+    volumes:
+    - ${PWD}:/work
+    runtime: nvidia
+    working_dir: /work
